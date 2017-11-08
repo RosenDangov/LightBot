@@ -4,5 +4,7 @@
   "description": "BestBot",
   "main": "bot.js",
   "author": "Lightside",
-  "dependencies": {}
+  "dependencies": {
+  	
+  }
 }

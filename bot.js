@@ -2,6 +2,8 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
+
+
 // Configure logger settings
 logger.remove(logger.transports.Console);
 logger.add(logger.transports.Console, {
@@ -19,6 +21,7 @@ bot.on('ready', function (evt) {
     logger.info(bot.username + ' - (' + bot.id + ')');
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
+
     // Our bot needs to know if it will execute a command
     // It will listen for messages that will start with `!`
     if (message.substring(0, 1) == '!') {
@@ -34,6 +37,11 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                 });
                 break;
 
+            // case 'live':
+            //     bot.sendMessage({
+            //         to: channelID,
+            //         message: GET https://api.twitch.tv/kraken/streams/<channel ID>
+            //     });
             case 'soviet':
                 bot.sendMessage({
                     to: channelID,
@@ -51,8 +59,42 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             // Just add any case commands if you want to..
          }
      }
-     bot.addReaction("emojilightside");
-
+    var lowerCase = message.toLowerCase();
+    if(lowerCase.includes("lightside") || lowerCase.includes("росен")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':emojilightside:322041422847016970'
+        });        
+    }
+    if(lowerCase.includes("castro")|| lowerCase.includes("кастро")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':emojicastro:322041422607810572'
+        });        
+    }
+    if(lowerCase.includes("михаил")|| lowerCase.includes("mihail") || lowerCase.includes("мишо")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':emojicastro:322041422607810572'
+        });        
+    }
+    if(lowerCase.includes("misa") || lowerCase.includes("миса")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':emojimisa:322041971827015682'
+        });        
+    }
+    if(lowerCase.includes("fortnite")|| lowerCase.includes("фортнайт")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':fortnite:375737892900962314'
+        });        
+    }
      if(message.substring(0,9) == "LightBot,"){
         var question = message.substring(9);
         if(question == " кой е най-якият?"){
