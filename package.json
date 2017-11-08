@@ -1,0 +1,8 @@
+{
+  "name": "LightBot",
+  "version": "1.0.0",
+  "description": "BestBot",
+  "main": "bot.js",
+  "author": "Lightside",
+  "dependencies": {}
+}

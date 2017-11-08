@@ -1,0 +1,2 @@
+# LightBot
+LightBot for Discord
