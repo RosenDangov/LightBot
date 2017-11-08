@@ -24,7 +24,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
     if (message.substring(0, 1) == '!') {
         var args = message.substring(1).split(' ');
         var cmd = args[0];
-       
         args = args.splice(1);
         switch(cmd) {
             // !ping
@@ -33,10 +32,27 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                     to: channelID,
                     message: 'Pong!'
                 });
-            break;
+                break;
+
+            case 'soviet':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'https://www.youtube.com/watch?v=U06jlgpMtQs'
+                });
+                break;
+                
+            // !sgp
+            case 'sgp':
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'Follow Soviet Gaming Program on Twitch: <https://go.twitch.tv/sovietgamingprogram>\nSubscribe on YouTube: <https://www.youtube.com/channel/UCmrHMfXqMD0kYDHzfveXKQQ>'
+                });
+                break;
             // Just add any case commands if you want to..
          }
      }
+     bot.addReaction("emojilightside");
+
      if(message.substring(0,9) == "LightBot,"){
         var question = message.substring(9);
         if(question == " кой е най-якият?"){
@@ -46,6 +62,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         to: channelID,
                         message: 'ти мн ясно'
                     });
+                    bot.addReaction()
                     break;
                 case 'Lightside':
                     bot.sendMessage({
