@@ -137,7 +137,7 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         });        
     }
     // hopefully in operator works
-    if(lowerCase in ["space engineers", "space eng", "космически инженери"] || message.includes("SE")){
+    if(["space engineers", "space eng", "космически инженери"].indexOf(lowerCase) >= 0 || message.includes("SE")){
         bot.addReaction({
             channelID: channelID,
             messageID: evt.d.id,
