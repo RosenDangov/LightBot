@@ -2,7 +2,7 @@
 var Discord = require('discord.io');
 var logger = require('winston');
 var auth = require('./auth.json');
-
+var request = require('request');
 
 // Configure logger settings
 logger.remove(logger.transports.Console);
@@ -42,6 +42,33 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             //         to: channelID,
             //         message: GET https://api.twitch.tv/kraken/streams/<channel ID>
             //     });
+            case 'online':
+                var answer;
+                var channel = args[0];
+                request({
+                    headers: {
+                      'Client-ID': 'q11z4l9d4csrbq5wamigmk8ztq0jdq'
+                    },
+                    uri: 'https://api.twitch.tv/kraken/streams/' + channel,
+                    method: 'GET'
+                  }, function (err, res, body) {
+                    answer = JSON.parse(body);
+                    var isStreaming = answer.stream != null;
+                    var toSend;
+                    if(isStreaming){
+                        toSend = channel + ' стриймва, беги да гледаш: ' + answer.stream.channel.url;
+                    }
+                    else{
+                        toSend = 'сори, ' + channel + ' е офлайн';
+                    }
+                    bot.sendMessage({
+                        to: channelID,
+                        message: toSend
+                    });
+                    //it works!
+                });   
+
+                break;
             case 'soviet':
                 bot.sendMessage({
                     to: channelID,

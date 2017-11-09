@@ -5,6 +5,6 @@
   "main": "bot.js",
   "author": "Lightside",
   "dependencies": {
-  	
+    "request": "^2.83.0",
   }
 }
