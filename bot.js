@@ -94,14 +94,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             reaction: ':emojilightside:322041422847016970'
         });        
     }
-    if(lowerCase.includes("castro")|| lowerCase.includes("кастро")){
+    if(lowerCase.includes("castro") || lowerCase.includes("кастро")){
         bot.addReaction({
             channelID: channelID,
             messageID: evt.d.id,
             reaction: ':emojicastro:322041422607810572'
         });        
     }
-    if(lowerCase.includes("михаил")|| lowerCase.includes("mihail") || lowerCase.includes("мишо")){
+    if(lowerCase.includes("михаил") || lowerCase.includes("mihail") || lowerCase.includes("мишо")){
         bot.addReaction({
             channelID: channelID,
             messageID: evt.d.id,
@@ -115,11 +115,33 @@ bot.on('message', function (user, userID, channelID, message, evt) {
             reaction: ':emojimisa:322041971827015682'
         });        
     }
-    if(lowerCase.includes("fortnite")|| lowerCase.includes("фортнайт")){
+    if(lowerCase.includes("fortnite") || lowerCase.includes("фортнайт")){
         bot.addReaction({
             channelID: channelID,
             messageID: evt.d.id,
             reaction: ':fortnite:375737892900962314'
+        });        
+    }
+    if(lowerCase.includes("rocket league") || lowerCase.includes("рокет лийг")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':rocketleague:365579110606438410'
+        });        
+    }
+    if(lowerCase.includes("prison architect") || lowerCase.includes("призън архитект")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':prisonarchitect:349831257930203138'
+        });        
+    }
+    // hopefully in operator works
+    if(lowerCase in ["space engineers", "space eng", "космически инженери"] || message.includes("SE")){
+        bot.addReaction({
+            channelID: channelID,
+            messageID: evt.d.id,
+            reaction: ':spaceeng:366902511782592513'
         });        
     }
      if(message.substring(0,9) == "LightBot,"){
