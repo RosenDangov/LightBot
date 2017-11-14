@@ -19,6 +19,15 @@ bot.on('ready', function (evt) {
     logger.info('Connected');
     logger.info('Logged in as: ');
     logger.info(bot.username + ' - (' + bot.id + ')');
+    bot.setPresence({
+    game:{
+        name:" with himself"
+    }});
+});
+bot.setPresence({
+    game:{
+        name:"Blah"
+    }
 });
 bot.on('message', function (user, userID, channelID, message, evt) {
 
@@ -30,10 +39,34 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         args = args.splice(1);
         switch(cmd) {
             // !ping
+            case 'roll':
+                var args = message.substring(6).split('d');
+                var dice = args[0];
+                var size = args[1];
+                var result = 0;
+                for(var i=0;i<dice;i++){
+                    result += Math.floor((Math.random() * size) + 1);
+                }
+                bot.sendMessage({
+                    to: channelID,
+                    message: 'Rolled '+dice+ ' '+size+'-sided '+ (dice==1?'die':'dice')+' for a result of : '+result
+                });
+                break;
             case 'ping':
                 bot.sendMessage({
                     to: channelID,
-                    message: 'Pong!'
+                    message: 'Pong'
+                });
+                break;
+            case 'react':
+                var mID = args[0];
+                console.log(mID);
+                var reaction = args[1];
+                console.log(reaction);
+                bot.addReaction({
+                    channelID: channelID,
+                    messageID: mID,
+                    reaction: reaction
                 });
                 break;
 
@@ -87,6 +120,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
          }
      }
     var lowerCase = message.toLowerCase();
+
+    // if(user == "MarvinBot"){
+    //     bot.sendMessage({
+    //         to: channelID,
+    //         message: 'HELLO FELLOW HUMAN'
+    //     });
+    // }
+
     if(lowerCase.includes("lightside") || lowerCase.includes("росен")){
         bot.addReaction({
             channelID: channelID,
@@ -137,13 +178,14 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         });        
     }
     // hopefully in operator works
-    if(["space engineers", "space eng", "космически инженери"].indexOf(lowerCase) >= 0 || message.includes("SE")){
+    if(["space engineers", "space eng", "космически инженери"].includes(lowerCase) || message.includes("СЕ") || message.includes("SE")){
         bot.addReaction({
             channelID: channelID,
             messageID: evt.d.id,
             reaction: ':spaceeng:366902511782592513'
         });        
     }
+
      if(message.substring(0,9) == "LightBot,"){
         var question = message.substring(9);
         if(question == " кой е най-якият?"){
@@ -153,7 +195,6 @@ bot.on('message', function (user, userID, channelID, message, evt) {
                         to: channelID,
                         message: 'ти мн ясно'
                     });
-                    bot.addReaction()
                     break;
                 case 'Lightside':
                     bot.sendMessage({
@@ -189,3 +230,34 @@ bot.on('message', function (user, userID, channelID, message, evt) {
         })
      }
 });
+
+
+
+// var requestLoop = setInterval(function(){
+//     var channel = "sovietgamingprogram"
+//   request({
+//         headers: {
+//           'Client-ID': 'q11z4l9d4csrbq5wamigmk8ztq0jdq'
+//         },
+//         uri: 'https://api.twitch.tv/kraken/streams/' + channel,
+//         method: 'GET'
+//   },function(error, response, body){
+//       if(!error && response.statusCode == 200){
+//             var answer = JSON.parse(body);
+//             var isStreaming = answer.stream != null;
+//             var toSend;
+//             if(isStreaming){
+//                 toSend = channel + ' стриймва, беги да гледаш: ' + answer.stream.channel.url;
+//             }
+//             else{
+//                 toSend = 'сори, ' + channel + ' е офлайн';
+//             }
+//             bot.sendMessage({
+//                 to: "211570773972877312",
+//                 message: toSend
+//             });
+//       }else{
+//           console.log('error' + response.statusCode);
+//       }
+//   });
+// }, 5000);
